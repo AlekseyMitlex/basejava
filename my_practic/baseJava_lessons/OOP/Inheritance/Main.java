@@ -1,4 +1,4 @@
-package baseJava_lessons.OOP_princip;
+package baseJava_lessons.OOP.Inheritance;
 
 public class Main {
     public static void main(String args[]) {

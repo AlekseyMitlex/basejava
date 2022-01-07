@@ -1,6 +1,7 @@
 package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
+
 import java.util.Arrays;
 
 /**
@@ -15,35 +16,57 @@ public class ArrayStorage {
         size = 0;
     }
 
-    public void update(Resume r) {
-        System.out.println("ERROR: код ошибки");
+    public void update(Resume resume) {
+        for (int i = 0; i < storage.length; i++) {
+            if (storage[i].getUuid().equals(resume.getUuid())) {
+                storage[i] = resume;
+                System.out.println("Резюме : " + resume.getUuid() + " найдено и обновлено");
+                break;
+            } else {
+                System.out.println("ERROR: не найдено - " + resume.getUuid());
+            }
+        }
     }
 
-    public void save(Resume r) {
-        storage[size] = r;
-        size++;
+    public void save(Resume resume) {
+        for (int i = 0; i < storage.length; i++) {
+            if (storage[i] == null) {
+                storage[size] = resume;
+                size++;
+                break;
+            }
+            if (storage[i].getUuid().equals(resume.getUuid())) {
+                System.out.println("ERROR: Уже есть резюме - " + storage[i].getUuid());
+                break;
+            }
+            if (size == storage.length) {
+                System.out.println("ERROR: Для нового резюме нет места");
+                break;
+            }
+        }
     }
 
     public Resume get(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return storage[i];
+            } else {
+                System.out.println("ERROR: Запрашиваемое резюме не найдено");
             }
         }
         return null;
     }
 
     public void delete(String uuid) {
-        int index = 0;
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
-                index = i;
-                break;
+                storage[i] = storage[size - 1];
+                storage[size - 1] = null;
+                size--;
+            } else {
+                System.out.println("ERROR: нет резюме " + uuid + " в списке");
             }
         }
-        storage[index] = storage[size - 1];
-        storage[size - 1] = null;
-        size--;
     }
 
     /**

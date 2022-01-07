@@ -12,6 +12,10 @@ public class ArrayStorage {
         size = 0;
     }
 
+    void update(Resume r) {
+        System.out.println("ERROR: код ошибки");
+    }
+
     void save(Resume r) {
         storage[size] = r;
         size++;

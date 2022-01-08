@@ -7,11 +7,6 @@ public class Resume {
     // Unique identifier
     private String uuid;
 
-    @Override
-    public int hashCode() {
-        return uuid.hashCode();
-    }
-
     public String getUuid() {
         return uuid;
     }
@@ -33,5 +28,10 @@ public class Resume {
         Resume resume = (Resume) o;
 
         return uuid.equals(resume.uuid);
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
     }
 }

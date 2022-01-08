@@ -20,44 +20,42 @@ public class ArrayStorage implements Storage {
 
     public void update(Resume resume) {
         int index = getIndex(resume.getUuid());
-        if (index != -1) {
-            storage[index] = resume;
-            System.out.println("Resume : " + resume.getUuid() + " найдено и обновлено");
+        if (index == -1) {
+            System.out.println("Resume " + resume.getUuid() + " not exist");
         } else {
-            System.out.println("ERROR: не найдено - " + resume.getUuid());
+            storage[index] = resume;
         }
     }
 
     public void save(Resume resume) {
         int index = getIndex(resume.getUuid());
-        if (index == -1) {
+        if (index != -1) {
+            System.out.println("Resume " + resume.getUuid() + " already exist");
+        } else if (size == STORAGE_LIMIT) {
+            System.out.println("Storage overflow");
+        } else {
             storage[size] = resume;
             size++;
-        } else if (size == STORAGE_LIMIT) {
-            System.out.println("ERROR: Для нового резюме нет места");
-        } else {
-            System.out.println("ERROR: Уже есть резюме - " + storage[index].getUuid());
         }
     }
 
     public Resume get(String uuid) {
         int index = getIndex(uuid);
-        if (index != -1) {
-            return storage[index];
-        } else {
-            System.out.println("ERROR: Запрашиваемое резюме не найдено");
+        if (index == -1) {
+            System.out.println("Resume " + uuid + " not exist");
+            return null;
         }
-        return null;
+        return storage[index];
     }
 
     public void delete(String uuid) {
         int index = getIndex(uuid);
-        if (index != -1) {
+        if (index == -1) {
+            System.out.println("Resume " + uuid + " not exist");
+        } else {
             storage[index] = storage[size - 1];
             storage[size - 1] = null;
             size--;
-        } else {
-            System.out.println("ERROR: нет резюме " + uuid + " в списке");
         }
     }
 

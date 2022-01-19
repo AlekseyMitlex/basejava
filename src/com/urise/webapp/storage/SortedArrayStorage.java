@@ -35,7 +35,7 @@ public class SortedArrayStorage extends AbstractArrayStorage{
 
     @Override
     protected void deleteResume(String uuid, int index) {
-        int index =
+
     }
 
     @Override

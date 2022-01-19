@@ -7,12 +7,6 @@ import com.urise.webapp.model.Resume;
  */
 
 public class ArrayStorage extends AbstractArrayStorage {
-
-    @Override
-    protected void addNewResume(Resume resume) {
-        storage[size] = resume;
-    }
-
     /**
      * @return array, contains only Resumes in storage (without null)
      * @paramr esume
@@ -25,5 +19,15 @@ public class ArrayStorage extends AbstractArrayStorage {
             }
         }
         return -1;
+    }
+
+    @Override
+    protected void deleteResume(String uuid, int index) {
+        storage[index] = storage[size - 1];
+    }
+
+    @Override
+    protected void addNewResume(Resume resume) {
+        storage[size] = resume;
     }
 }

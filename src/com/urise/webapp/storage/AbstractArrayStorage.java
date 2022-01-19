@@ -17,6 +17,8 @@ public abstract class AbstractArrayStorage implements Storage {
 
     protected abstract void addNewResume(Resume resume);
 
+    protected abstract void deleteResume(String uuid, int index);
+
     public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
@@ -53,11 +55,11 @@ public abstract class AbstractArrayStorage implements Storage {
 
 
     public void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (index == -1) {
+        int indexDelete = getIndex(uuid);
+        if (indexDelete < 0) {
             System.out.println("Resume " + uuid + " not exist");
         } else {
-            storage[index] = storage[size - 1];
+            deleteResume(uuid, index);
             storage[size - 1] = null;
             size--;
         }

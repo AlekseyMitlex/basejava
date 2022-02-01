@@ -14,6 +14,7 @@ public class MainReflection {
         field.get(resume);
         System.out.println("resume = " + resume);
         field.set(resume, "new_uuid");
+        // TODO : invoke resume.toString via reflection
         System.out.println("resume = " + resume);
     }
 }

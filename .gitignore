@@ -26,3 +26,9 @@ hs_err_pid*
 /startjava.iml
 /.idea/
 /basejava.iml
+
+# new
+*.html
+*.css
+*.js
+/element-list

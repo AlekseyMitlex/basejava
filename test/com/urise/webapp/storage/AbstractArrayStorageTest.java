@@ -8,10 +8,14 @@ import org.junit.Test;
 
 public abstract class AbstractArrayStorageTest {
 
+    //    private Storage storage = new ArrayStorage();
     private Storage storage;
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
+
+    public AbstractArrayStorageTest(SortedArrayStorage arrayStorage) {
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -22,16 +26,16 @@ public abstract class AbstractArrayStorageTest {
     }
 
     @Test
+    public void size() {
+        Assert.assertEquals(3, storage.size());
+    }
+
+    @Test
     public void getAll() {
     }
 
     @Test
     public void clear() {
-    }
-
-    @Test
-    public void size() {
-        Assert.assertEquals(3, storage.size());
     }
 
     @Test

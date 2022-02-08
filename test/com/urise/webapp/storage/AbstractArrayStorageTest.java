@@ -2,6 +2,7 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
+import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,6 +16,7 @@ public abstract class AbstractArrayStorageTest {
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
     private static final String UUID_4 = "uuid4";
+    private final static Resume resume1 = new Resume("uuid1");
 
     public AbstractArrayStorageTest(Storage storage) {
         this.storage = storage;
@@ -60,6 +62,12 @@ public abstract class AbstractArrayStorageTest {
 
     @Test(expected = ExistStorageException.class)
     public void getExistResume() {
+        storage.save(new Resume(UUID_1));
+    }
+
+    @Test(expected = StorageException.class)
+    public void getStorageOverflow() {
+        storage.save(new Resume(UUID_4));
     }
 
     @Test

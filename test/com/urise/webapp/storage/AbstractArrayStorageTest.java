@@ -1,5 +1,6 @@
 package com.urise.webapp.storage;
 
+import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 import org.junit.Assert;
@@ -34,12 +35,7 @@ public abstract class AbstractArrayStorageTest {
     @Test
     public void getAll() {
         Resume[] allResume = new Resume[3];
-        int index = 0;
-        for (int i = 0; i < allResume.length; i++) {
-            allResume[index] = allResume[i];
-
-        }
-        assertArrayEquals(allResume, storage.size());
+        Assert.assertEquals(allResume.length, storage.size());
     }
 
     @Test
@@ -54,8 +50,10 @@ public abstract class AbstractArrayStorageTest {
         Assert.assertEquals(storage.get(UUID_1), new Resume(UUID_1));
     }
 
-    @Test
+    @Test(expected = ExistStorageException.class)
     public void save() {
+        if (new Resume(UUID_1).equals(storage.get(UUID_1))) {
+        }
     }
 
     @Test

@@ -33,14 +33,25 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void getAll() {
+        Resume[] allResume = new Resume[3];
+        int index = 0;
+        for (int i = 0; i < allResume.length; i++) {
+            allResume[index] = allResume[i];
+
+        }
+        assertArrayEquals(allResume, storage.size());
     }
 
     @Test
     public void clear() {
+        storage.clear();
+        Assert.assertEquals(0, storage.size());
     }
 
     @Test
     public void update() {
+        storage.update(new Resume(UUID_1));
+        Assert.assertEquals(storage.get(UUID_1), new Resume(UUID_1));
     }
 
     @Test

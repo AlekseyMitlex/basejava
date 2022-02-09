@@ -13,7 +13,7 @@ public interface Storage {
 
     void save(Resume resume);
 
-    Resume get(String uuid);
+    Object get(String uuid);
 
     void delete(String uuid);
 

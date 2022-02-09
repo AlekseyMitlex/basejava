@@ -4,6 +4,7 @@ import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,12 +56,11 @@ public abstract class AbstractArrayStorageTest {
 
     @Test(expected = StorageException.class)
     public void saveStorageOverflow() {
-        try {
-            for (int i = storage.size(); i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
-                storage.save(new Resume());
+        for (int i = storage.size(); i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
+            storage.save(new Resume());
+            if (storage.size() > AbstractArrayStorage.STORAGE_LIMIT) {
+                Assert.fail("Error - overflow occurred ahead of time");
             }
-        } catch (StorageException e) {
-            fail("Error - overflow occurred ahead of time");
         }
     }
 

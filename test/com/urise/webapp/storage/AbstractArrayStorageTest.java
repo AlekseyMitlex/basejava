@@ -7,8 +7,7 @@ import com.urise.webapp.model.Resume;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 public abstract class AbstractArrayStorageTest {
 
@@ -17,7 +16,6 @@ public abstract class AbstractArrayStorageTest {
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
     private static final String UUID_4 = "uuid4";
-    private final static Resume r4 = new Resume("uuid4");
     private final static Resume r1 = new Resume("uuid1");
 
     public AbstractArrayStorageTest(Storage storage) {
@@ -46,24 +44,25 @@ public abstract class AbstractArrayStorageTest {
 
     @Test(expected = NotExistStorageException.class)
     public void updateNotExisted() {
-        storage.update(r4);
+        storage.update(new Resume(UUID_4));
     }
 
     @Test(expected = ExistStorageException.class)
-    public void getExistResume() {
+    public void saveExistResume() {
         Resume r4 = new Resume(UUID_1);
         storage.save(r4);
     }
 
     @Test(expected = StorageException.class)
-    public void getStorageOverflow() {
+    public void saveStorageOverflow() {
         storage.save(new Resume());
     }
 
-    @Test
+    @Test(expected = NotExistStorageException.class)
     public void delete() {
         storage.delete(UUID_1);
         assertEquals(2, storage.size());
+        storage.get(UUID_1);
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -79,19 +78,14 @@ public abstract class AbstractArrayStorageTest {
     }
 
     @Test(expected = NotExistStorageException.class)
-    public void getNotExist() {
-        assertEquals(new Resume(UUID_1), storage.get(UUID_4));
-    }
-
-    @Test(expected = NotExistStorageException.class)
     public void getNotExistDummy() {
         storage.get("dummy");
     }
 
     @Test
     public void getAll() {
-        Resume[] allResume = new Resume[3];
-        assertEquals(allResume.length, storage.size());
+        Resume[] resumes = {new Resume(UUID_1), new Resume(UUID_2), new Resume(UUID_3)};
+        assertArrayEquals(resumes, storage.getAll());
     }
 
     @Test

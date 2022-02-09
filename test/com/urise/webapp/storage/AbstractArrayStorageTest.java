@@ -57,6 +57,9 @@ public abstract class AbstractArrayStorageTest {
     public void saveStorageOverflow() {
         for (int i = 3; i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
             storage.save(new Resume());
+            if (i >= AbstractArrayStorage.STORAGE_LIMIT) {
+            }
+            fail("Error - overflow occurred ahead of time");
         }
     }
 

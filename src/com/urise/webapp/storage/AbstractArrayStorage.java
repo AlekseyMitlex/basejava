@@ -22,17 +22,9 @@ public abstract class AbstractArrayStorage implements Storage {
 
     protected abstract void fillDeletedElement(int index);
 
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
-    }
-
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
-    }
-
-    public int size() {
-        return size;
     }
 
     public void update(Resume resume) {
@@ -54,6 +46,14 @@ public abstract class AbstractArrayStorage implements Storage {
         size++;
     }
 
+    public Resume get(String uuid) {
+        int index = getIndex(uuid);
+        if (index < 0) {
+            throw new NotExistStorageException(uuid);
+        }
+        return storage[index];
+    }
+
     public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
@@ -64,11 +64,11 @@ public abstract class AbstractArrayStorage implements Storage {
         size--;
     }
 
-    public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        return storage[index];
+    public Resume[] getAll() {
+        return Arrays.copyOf(storage, size);
+    }
+
+    public int size() {
+        return size;
     }
 }

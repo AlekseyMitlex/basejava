@@ -10,19 +10,16 @@ public class MainReflection {
 
     public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         Resume resume = new Resume();
-        System.out.println("resume = " + resume);
-        Field field = resume.getClass().getDeclaredFields()[0];
-        System.out.println("field.getName() = " + field.getName());
+        Class<? extends Resume> resumeClass = resume.getClass();
+        Field field = resumeClass.getDeclaredFields()[0];
         field.setAccessible(true);
         System.out.println("field.getName() = " + field.getName());
+        System.out.println("field.get(resume) = " + field.get(resume));
         field.get(resume);
-        System.out.println("resume = " + resume);
         field.set(resume, "new_uuid");
-        System.out.println("resume = " + resume);
 
-        // TODO : invoke resume.toString via reflection
-        Method method = resume.getClass().getDeclaredMethod("toString");
-        method.invoke(resume);
-        System.out.println(resume);
+        Method method = resumeClass.getDeclaredMethod("toString");
+        Object result = method.invoke(resume);
+        System.out.println("result = " + result);
     }
 }

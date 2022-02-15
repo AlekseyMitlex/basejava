@@ -56,8 +56,15 @@ public class MainCollections {
         map.put(UUID_1, RESUME_1);
         map.put(UUID_2, RESUME_2);
         map.put(UUID_3, RESUME_3);
+        // Bad!
+        for (String map1 : map.keySet()) {
+            System.out.println("map1 = " + map1);
+        }
 
-        System.out.println("map = " + map.keySet());
+        for (Map.Entry<String, Resume> entry : map.entrySet()) {
+            System.out.println("entry = " + entry.getValue());
+        }
+
     }
 
 }

@@ -2,10 +2,16 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
 
+import java.util.Iterator;
+
 public class ListStorage extends AbstractStorage {
+
     @Override
     public void clear() {
-
+        Iterator<Resume> iterator = storage.iterator();
+        while (iterator.hasNext()) {
+            iterator.remove();
+        }
     }
 
     @Override

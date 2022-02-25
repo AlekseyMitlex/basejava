@@ -18,12 +18,18 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
+    protected Resume getResume(int index) {
+        return storage.get(index);
+    }
+
+    @Override
     public void clear() {
+        storage.clear();
     }
 
     @Override
     public void update(Resume resume) {
-        storage.set(resume, get(resume.getUuid()));
+        storage.set(getIndex(resume.getUuid()), resume);
     }
 
     @Override
@@ -38,17 +44,17 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public void delete(String uuid) {
-
+        storage.remove(uuid);
     }
 
     @Override
     public Resume[] getAll() {
-        return new Resume[0];
+        return storage.toArray(new Resume[storage.size()]);
     }
 
     @Override
     public int size() {
-        return 0;
+        return storage.size();
     }
 
     @Override

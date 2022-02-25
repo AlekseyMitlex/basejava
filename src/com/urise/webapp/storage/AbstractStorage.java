@@ -4,8 +4,6 @@ import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 
-import java.util.Arrays;
-
 public abstract class AbstractStorage implements Storage {
 
     protected abstract int getIndex(String uuid);
@@ -13,6 +11,8 @@ public abstract class AbstractStorage implements Storage {
     protected abstract void insertElement(Resume resume, int index);
 
     protected abstract void fillDeletedElement(int index);
+
+    protected abstract Resume getResume(int index);
 
     @Override
     public void clear() {
@@ -40,7 +40,7 @@ public abstract class AbstractStorage implements Storage {
         if (index < 0) {
             throw new NotExistStorageException(uuid);
         }
-        return newResume(getIndex(uuid));
+        return getResume(index);
     }
 
     @Override
@@ -49,17 +49,14 @@ public abstract class AbstractStorage implements Storage {
         if (index < 0) {
             throw new NotExistStorageException(uuid);
         }
-        fillDeletedElement(index);
-        storage[size - 1] = null;
-        size--;
     }
 
     @Override
     public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
+        return new Resume[0];
     }
 
     public int size() {
-        return size;
+        return size();
     }
 }

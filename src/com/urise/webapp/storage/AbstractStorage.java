@@ -18,7 +18,7 @@ public abstract class AbstractStorage implements Storage {
 
     @Override
     public void update(Resume resume) {
-        getNotExist(resume.getUuid());
+        checkNotExist(resume.getUuid());
         getUpdate(resume, getIndex(resume.getUuid()));
     }
 
@@ -33,17 +33,17 @@ public abstract class AbstractStorage implements Storage {
 
     @Override
     public Resume get(String uuid) {
-        getNotExist(uuid);
+        checkNotExist(uuid);
         return getResume(getIndex(uuid));
     }
 
     @Override
     public void delete(String uuid) {
-        getNotExist(uuid);
+        checkNotExist(uuid);
         getDelete(uuid, getIndex(uuid));
     }
 
-    public void getNotExist(String uuid) {
+    public void checkNotExist(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
             throw new NotExistStorageException(uuid);

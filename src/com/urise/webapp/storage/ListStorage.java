@@ -28,18 +28,13 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public void update(Resume resume) {
+    public void getUpdate(Resume resume) {
         storage.set(getIndex(resume.getUuid()), resume);
     }
 
     @Override
     public void save(Resume resume) {
         storage.add(resume);
-    }
-
-    @Override
-    public Resume get(String uuid) {
-        return storage.get(getIndex(uuid));
     }
 
     @Override

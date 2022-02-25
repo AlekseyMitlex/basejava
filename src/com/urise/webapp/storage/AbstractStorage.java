@@ -14,9 +14,7 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract Resume getResume(int index);
 
-    @Override
-    public void clear() {
-    }
+    protected abstract void getUpdate(Resume resume);
 
     @Override
     public void update(Resume resume) {
@@ -24,6 +22,7 @@ public abstract class AbstractStorage implements Storage {
         if (index < 0) {
             throw new NotExistStorageException(resume.getUuid());
         }
+        getUpdate(Resume resume);
     }
 
     @Override
@@ -51,12 +50,4 @@ public abstract class AbstractStorage implements Storage {
         }
     }
 
-    @Override
-    public Resume[] getAll() {
-        return new Resume[0];
-    }
-
-    public int size() {
-        return size();
-    }
 }

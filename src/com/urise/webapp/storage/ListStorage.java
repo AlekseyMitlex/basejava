@@ -2,31 +2,38 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
 
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListStorage extends AbstractStorage {
 
+    private List<Resume> storage = new ArrayList<>();
+
+    @Override
+    protected void insertElement(Resume resume, int index) {
+    }
+
+    @Override
+    protected void fillDeletedElement(int index) {
+    }
+
     @Override
     public void clear() {
-        Iterator<Resume> iterator = storage.iterator();
-        while (iterator.hasNext()) {
-            iterator.remove();
-        }
     }
 
     @Override
     public void update(Resume resume) {
-
+        storage.set(resume, get(resume.getUuid()));
     }
 
     @Override
     public void save(Resume resume) {
-
+        storage.add(resume);
     }
 
     @Override
-    public Object get(String uuid) {
-        return null;
+    public Resume get(String uuid) {
+        return storage.get(getIndex(uuid));
     }
 
     @Override
@@ -42,5 +49,15 @@ public class ListStorage extends AbstractStorage {
     @Override
     public int size() {
         return 0;
+    }
+
+    @Override
+    protected int getIndex(String uuid) {
+        for (int i = 0; i < storage.size(); i++) {
+            if (uuid.equals(storage.get(i).getUuid())) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

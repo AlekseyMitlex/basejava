@@ -12,6 +12,10 @@ import java.util.Arrays;
  */
 public abstract class AbstractArrayStorage extends AbstractStorage {
 
+    protected static final int STORAGE_LIMIT = 5;
+    protected Resume[] storage = new Resume[STORAGE_LIMIT];
+    protected int size;
+
     protected abstract int getIndex(String uuid);
 
     protected abstract void insertElement(Resume resume, int index);

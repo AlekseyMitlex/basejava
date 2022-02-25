@@ -10,14 +10,6 @@ public class ListStorage extends AbstractStorage {
     private List<Resume> storage = new ArrayList<>();
 
     @Override
-    protected void insertElement(Resume resume, int index) {
-    }
-
-    @Override
-    protected void fillDeletedElement(int index) {
-    }
-
-    @Override
     protected Resume getResume(int index) {
         return storage.get(index);
     }
@@ -28,17 +20,17 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public void getUpdate(Resume resume) {
+    public void getUpdate(Resume resume, int index) {
         storage.set(getIndex(resume.getUuid()), resume);
     }
 
     @Override
-    public void save(Resume resume) {
+    public void getSave(Resume resume, int index) {
         storage.add(resume);
     }
 
     @Override
-    public void delete(String uuid) {
+    public void getDelete(String uuid, int index) {
         storage.remove(uuid);
     }
 

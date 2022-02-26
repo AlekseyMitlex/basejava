@@ -21,7 +21,7 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected void getSave(Resume resume, int index) {
-
+        storage.put(resume.getUuid(), resume);
     }
 
     @Override
@@ -46,11 +46,6 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected int getIndex(String uuid) {
-        for (int i = 0; i < storage.size(); i++) {
-            if (uuid.equals(storage.get(i).getUuid())) {
-                return i;
-            }
-        }
-        return -1;
+        return storage.get(uuid);
     }
 }

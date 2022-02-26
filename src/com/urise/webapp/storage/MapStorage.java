@@ -2,12 +2,12 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public class ListStorage extends AbstractStorage {
+public class MapStorage extends AbstractStorage {
 
-    private List<Resume> storage = new ArrayList<>();
+    private Map<String, Resume> storage = new HashMap<>();
 
     @Override
     public void clear() {
@@ -15,33 +15,33 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public void getUpdate(Resume resume, int index) {
-        storage.set(getIndex(resume.getUuid()), resume);
+    protected void getUpdate(Resume resume, int index) {
+        storage.replace(resume.getUuid(), resume);
     }
 
     @Override
-    public void getSave(Resume resume, int index) {
-        storage.add(resume);
+    protected void getSave(Resume resume, int index) {
+
     }
 
     @Override
     protected Resume getResume(int index) {
-        return storage.get(index);
+        return null;
     }
 
     @Override
-    public void getDelete(String uuid, int index) {
-        storage.remove(index);
+    protected void getDelete(String uuid, int index) {
+
     }
 
     @Override
     public Resume[] getAll() {
-        return storage.toArray(new Resume[storage.size()]);
+        return new Resume[0];
     }
 
     @Override
     public int size() {
-        return storage.size();
+        return 0;
     }
 
     @Override

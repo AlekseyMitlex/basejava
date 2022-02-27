@@ -15,22 +15,22 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void getUpdate(Resume resume, int index) {
+    protected void dotUpdate(Resume resume, Object index) {
         storage.replace(resume.getUuid(), resume);
     }
 
     @Override
-    protected void getSave(Resume resume, int index) {
+    protected void doSave(Resume resume, Object index) {
         storage.put(resume.getUuid(), resume);
     }
 
     @Override
-    protected Resume getResume(int index) {
+    protected Resume doGet(Object index) {
         return null;
     }
 
     @Override
-    protected void getDelete(String uuid, int index) {
+    protected void doDelete(String uuid, Object index) {
 
     }
 
@@ -45,7 +45,7 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected int getIndex(String uuid) {
+    protected int getSearchKey(String uuid) {
         return storage.get(uuid);
     }
 }

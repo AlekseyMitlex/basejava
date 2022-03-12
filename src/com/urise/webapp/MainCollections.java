@@ -42,7 +42,6 @@ public class MainCollections {
 //                collection.remove(resume);
             }
         }
-
         Iterator<Resume> iterator = collection.iterator();
         while (iterator.hasNext()) {
             Resume resume = iterator.next();
@@ -50,7 +49,7 @@ public class MainCollections {
                 iterator.remove();
             }
         }
-        System.out.println(collection.toString());
+        System.out.println("После iterator.remove() " + collection.toString());
 
         Map<String, Resume> map = new HashMap<>();
         map.put(UUID_1, RESUME_1);

@@ -14,15 +14,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         }
 }*/
 
-    private static final Comparator<Resume> RESUME_COMPARATOR = (o1, o2) -> o1.getFullName().compareTo(o2.getFullName());
-
-//    private static final Comparator<Resume> RESUME_COMPARATOR = (o1, o2) -> {
-//        int result = o1.getFullName().compareTo(o2.getFullName());
-//        if (result == 0) {
-//            result = o1.getUuid().compareTo(o2.getUuid());
-//        }
-//        return result;
-//    };
+    private static final Comparator<Resume> RESUME_COMPARATOR = Comparator.comparing(Resume::getUuid);
 
     @Override
     protected void insertElement(Resume resume, int index) {

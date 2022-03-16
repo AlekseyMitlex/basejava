@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -108,16 +107,6 @@ public abstract class AbstractStorageTest {
     @Test(expected = NotExistStorageException.class)
     public void deleteNotExisted() {
         storage.delete("dummy");
-    }
-
-    @Test
-    public void getAll() {
-        Resume[] array = storage.getAll();
-        Arrays.sort(array);
-        assertEquals(3, array.length);
-        assertEquals(RESUME_1, array[0]);
-        assertEquals(RESUME_2, array[1]);
-        assertEquals(RESUME_3, array[2]);
     }
 
     @Test

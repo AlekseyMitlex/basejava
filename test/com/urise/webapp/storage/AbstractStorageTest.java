@@ -111,6 +111,7 @@ public abstract class AbstractStorageTest {
     public void getAll() {
         Resume[] array = storage.getAll();
         Arrays.sort(array);
+        System.out.println("array = " + Arrays.toString(array));
         assertEquals(3, array.length);
         assertEquals(RESUME_1, array[0]);
         assertEquals(RESUME_2, array[1]);

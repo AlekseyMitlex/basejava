@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -21,10 +22,10 @@ public abstract class AbstractStorageTest {
     private static final String UUID_3 = "uuid3";
     private static final String UUID_4 = "uuid4";
 
-    private static final String FULLNAME_1 = "Full Name_1";
-    private static final String FULLNAME_2 = "Full Name_2";
-    private static final String FULLNAME_3 = "Full Name_3";
-    private static final String FULLNAME_4 = "Full Name_4";
+    private static final String FULLNAME_1 = "Bill Name_2";
+    private static final String FULLNAME_2 = "Alex Name_1";
+    private static final String FULLNAME_3 = "Dick Name_3";
+    private static final String FULLNAME_4 = "Jack Name_4";
 
 
     private static final Resume RESUME_1;
@@ -125,6 +126,7 @@ public abstract class AbstractStorageTest {
         list.add(RESUME_1);
         list.add(RESUME_2);
         list.add(RESUME_3);
+        list.sort(Comparator.comparing(Resume::getFullName).thenComparing(Resume::getUuid));
         assertEquals(list, storage.getAllSorted());
     }
 

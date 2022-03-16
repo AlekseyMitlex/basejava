@@ -2,6 +2,7 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,45 +13,47 @@ public class MapUuidStorage extends AbstractStorage {
 
     @Override
     public void clear() {
+        map.clear();
     }
 
     @Override
     protected void doUpdate(Resume resume, Object searchKey) {
-
+        map.replace(resume.getUuid(), resume);
     }
 
     @Override
     protected void doSave(Resume resume, Object searchKey) {
-
+        map.put((String) searchKey, resume);
     }
 
     @Override
     protected Resume doGet(Object searchKey) {
-        return null;
+        return map.get((String) searchKey);
     }
 
     @Override
     protected void doDelete(Object searchKey) {
-
+        map.remove((String) searchKey);
     }
 
     @Override
     public List<Resume> getAllSorted() {
-        return null;
+        List<Resume> list = new ArrayList<Resume>(map.values());
+        return list;
     }
 
     @Override
     public int size() {
-        return 0;
+        return map.size();
     }
 
     @Override
-    protected Object getSearchKey(String uuid) {
-        return null;
+    protected String getSearchKey(String uuid) {
+        return uuid;
     }
 
     @Override
     protected boolean isExist(Object searchKey) {
-        return false;
+        return map.containsKey((String) searchKey);
     }
 }

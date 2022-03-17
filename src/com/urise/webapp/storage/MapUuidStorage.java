@@ -46,10 +46,8 @@ public class MapUuidStorage extends AbstractStorage {
     }
 
     @Override
-    protected String getSearchKey(String fullname) {
-        for (Map.Entry<String, Resume> resumeEntry : map.entrySet()) {
-        }
-        return fullname;
+    protected String getSearchKey(String uuid) {
+        return uuid;
     }
 
     @Override

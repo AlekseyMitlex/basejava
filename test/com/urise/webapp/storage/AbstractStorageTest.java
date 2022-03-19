@@ -6,7 +6,7 @@ import com.urise.webapp.model.Resume;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -20,10 +20,10 @@ public abstract class AbstractStorageTest {
     private static final String UUID_3 = "uuid3";
     private static final String UUID_4 = "uuid4";
 
-    private static final String FULLNAME_1 = "Alex Name_1";
-    private static final String FULLNAME_2 = "Bill Name_2";
-    private static final String FULLNAME_3 = "Dick Name_3";
-    private static final String FULLNAME_4 = "Jack Name_4";
+    private static final String FULLNAME_1 = "Name1";
+    private static final String FULLNAME_2 = "Name2";
+    private static final String FULLNAME_3 = "Name3";
+    private static final String FULLNAME_4 = "Name4";
 
 
     private static final Resume RESUME_1 = new Resume(UUID_1, FULLNAME_1);
@@ -51,7 +51,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() {
-        Resume newResume = new Resume(UUID_1, FULLNAME_1);
+        Resume newResume = new Resume(UUID_1, "New Name");
         storage.update(newResume);
         assertSame(newResume, storage.get(UUID_1));
     }
@@ -103,11 +103,9 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void getAllSorted() {
-        List<Resume> list = new ArrayList<>();
-        list.add(RESUME_1);
-        list.add(RESUME_2);
-        list.add(RESUME_3);
-        assertEquals(list, storage.getAllSorted());
+        List<Resume> list = storage.getAllSorted();
+        assertEquals(3, list.size());
+        assertEquals(list, Arrays.asList(RESUME_1, RESUME_2, RESUME_3));
     }
 
     @Test

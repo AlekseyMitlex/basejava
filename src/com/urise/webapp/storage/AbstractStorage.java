@@ -21,7 +21,7 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract boolean isExist(Object searchKey);
 
-    protected abstract List<Resume> toDoSorted();
+    protected abstract List<Resume> doCopyAll();
 
     @Override
     public void update(Resume resume) {
@@ -49,7 +49,7 @@ public abstract class AbstractStorage implements Storage {
 
     @Override
     public List<Resume> getAllSorted() {
-        List<Resume> list = toDoSorted();
+        List<Resume> list = doCopyAll();
         list.sort(Comparator.comparing(Resume::getFullName).thenComparing(Resume::getUuid));
         return list;
     }
